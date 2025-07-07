@@ -1,41 +1,57 @@
-# Prerequisites
+*~
+
+# Build directory
+/build/
+
+# Generated CMake files
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+
+# Configuration files
+CMakeConfigureLog.yaml
+
+# Dependency files
 *.d
 
-# Compiled Object files
-*.slo
-*.lo
-*.o
-*.obj
+# Generated binaries
+/starpu_server
+*.elf
+*.map
 
-# Precompiled Headers
-*.gch
-*.pch
+# Temporary files
+CMakeTmp/
+CMakeScratch/
+*.log
+*.tmp
 
-# Linker files
-*.ilk
+# CMake cache (in subfolders)
+**/CMakeFiles/
+**/CMakeCache.txt
+**/Makefile
+**/cmake_install.cmake
 
-# Debugger Files
-*.pdb
+# DNN torchs model
+*.pt
 
-# Compiled Dynamic libraries
-*.so
-*.dylib
-*.dll
+# Python files
+*.pyc
+__pycache__/
+*.pyo
+*.pyd
 
-# Fortran module files
-*.mod
-*.smod
+# Virtual environments
+.venv/
+venv/
 
-# Compiled Static libraries
-*.lai
-*.la
-*.a
-*.lib
+# VSCode
+.vscode/
 
-# Executables
-*.exe
-*.out
-*.app
+# CLion / JetBrains
+.idea/
+cmake-build-*/
 
-# debug information files
-*.dwo
+# Files generated automatically by protoc
+*.pb.cc
+*.pb.h

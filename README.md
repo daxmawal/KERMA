@@ -1,2 +1,1 @@
-# KERMA
-KERMA
+# KERMA (Kernel Extraction and Replay for Micro-Analysis)
