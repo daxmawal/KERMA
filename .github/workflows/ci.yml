@@ -1,0 +1,64 @@
+name: pipeline
+
+on: [push, pull_request]
+
+permissions:
+  contents: read
+
+jobs:
+  cmake-format:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install cmake-format
+        run: pip install cmakelang
+
+      - name: Check CMake formatting
+        run: |
+          FILES=$(find . -name 'CMakeLists.txt' -o -name '*.cmake')
+          echo "Checking format for: $FILES"
+
+          fail=0
+          for file in $FILES; do
+            if ! diff -u "$file" <(cmake-format "$file"); then
+              echo "::error file=$file::File is not properly formatted"
+              fail=1
+            fi
+          done
+          exit $fail
+
+  clang-format:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install clang-format
+        run: sudo apt-get install -y clang-format
+
+      - name: Check formatting
+        run: |
+          FILES=$(find . -regex '.*\.\(cpp\|hpp\|c\|h\)' -not -path "./build/*")
+          clang-format --dry-run --Werror $FILES
+
+  build:
+    needs: [clang-format, cmake-format]
+    runs-on: self-hosted
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Configure and Build
+        run: |
+          cmake ..
+          cmake --build build
+        shell: bash
+
+      - name: Save build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-folder
+          path: build/
