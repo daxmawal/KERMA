@@ -10,6 +10,4 @@ find_package(Boost REQUIRED COMPONENTS serialization)
 
 add_executable(main src/main.cpp)
 
-target_link_libraries(main PRIVATE 
-    Kokkos::kokkos
-    Boost::serialization)
+target_link_libraries(main PRIVATE Kokkos::kokkos Boost::serialization)
