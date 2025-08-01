@@ -10,7 +10,6 @@ This enables:
 ---
 
 ## Installation
----
  
 1. Ensure your CMake project exports a `compile_commands.json` file:
  
@@ -24,9 +23,10 @@ cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -B build
 sudo apt install clang libclang-dev
 pip install -r requirements.txt
 ```
- 
-### Usage
+
 ---
+
+### Usage
  
 Run `extract_and_export.py` to isolate a single function:
  
