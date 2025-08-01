@@ -1,1 +1,2 @@
 libclang>=16.0
+black
