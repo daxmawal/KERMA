@@ -10,6 +10,7 @@ This enables:
 ---
 
 ## Installation
+---
  
 1. Ensure your CMake project exports a `compile_commands.json` file:
  
