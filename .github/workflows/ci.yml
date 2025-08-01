@@ -43,22 +43,33 @@ jobs:
           FILES=$(find . -regex '.*\.\(cpp\|hpp\|c\|h\)' -not -path "./build/*")
           clang-format --dry-run --Werror $FILES
 
-  build:
-    needs: [clang-format, cmake-format]
-    runs-on: self-hosted
-
+  python-black:
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Configure and Build
-        run: |
-          cmake ..
-          cmake --build build
-        shell: bash
+      - name: Install Black
+        run: pip install black
 
-      - name: Save build artifacts
-        uses: actions/upload-artifact@v4
+      - name: Check Python formatting
+        run: black --check .
+
+  python-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
         with:
-          name: build-folder
-          path: build/
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+          pip install pytest
+
+      - name: Run tests
+        run: pytest -q
