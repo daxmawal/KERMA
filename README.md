@@ -41,4 +41,6 @@ python3 extract_and_export.py \
 
 This will generate a file like:
 
+```bash
 extracted_ServerIsLive.cpp
+```
