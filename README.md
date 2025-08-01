@@ -1,5 +1,5 @@
 # KERMA (Kernel Extraction and Replay for Micro-Analysis)
- 
+
 KERMA is a small utility that extracts a single C++ function from an existing code base and writes it to its own `.cpp` file with the minimum set of `#include` directives. The project goal is to make micro benchmarks and focused debugging of complex code easier.
 
 This enables:
@@ -10,7 +10,7 @@ This enables:
 ---
 
 ## Installation
- 
+
 1. Ensure your CMake project exports a `compile_commands.json` file:
  
 ```bash
@@ -27,7 +27,7 @@ pip install -r requirements.txt
 ---
 
 ### Usage
- 
+
 Run `extract_and_export.py` to isolate a single function:
  
 ```bash
