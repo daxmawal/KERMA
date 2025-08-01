@@ -1,46 +1,48 @@
 # KERMA (Kernel Extraction and Replay for Micro-Analysis)
+ 
+KERMA is a small utility that extracts a single C++ function from an existing code base and writes it to its own `.cpp` file with the minimum set of `#include` directives. The project goal is to make micro benchmarks and focused debugging of complex code easier.
 
-**KERMA** is a tool for automatically extracting C++ functions (or class methods) from source files into standalone `.cpp` files with their minimal required dependencies (`#include` directives).  
 This enables:
-
+ 
 - Isolated **performance profiling**
 - Simplified **unit testing**
-- Easy **reduction of complex cases**
-
+ 
 ---
 
-## Prerequisites
-
-### Build with `compile_commands.json`
-
-Make sure your CMake project generates a `compile_commands.json` file:
-
+## Installation
+ 
+1. Ensure your CMake project exports a `compile_commands.json` file:
+ 
 ```bash
 cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -B build
 ```
 
-#### Dependencies
-
-Install required system packages and Python bindings:
-
+2. Install the required packages and Python bindings:
+ 
 ```bash
 sudo apt install clang libclang-dev
-pip install libclang
+pip install -r requirements.txt
 ```
-
+ 
 ##### Usage
+---
 
-Run the following command to extract a function:
-
+## Usage
+ 
+Run `extract_and_export.py` to isolate a single function:
+ 
 ```bash
 python3 extract_and_export.py \
-  path/to/source.cpp \
-  path/to/compile_commands.json \
-  FunctionName
+path/to/source.cpp \
+path/to/compile_commands.json \
+FunctionName
 ```
-
-This will generate a file like:
-
+ 
+This will generate a new file, for example:
+ 
 ```bash
-extracted_ServerIsLive.cpp
+extracted_FunctionName.cpp
 ```
+
+The produced file contains all necessary includes and the requested function so
+that you can build and analyze it in isolation.
