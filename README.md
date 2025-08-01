@@ -24,10 +24,8 @@ sudo apt install clang libclang-dev
 pip install -r requirements.txt
 ```
  
-##### Usage
+### Usage
 ---
-
-## Usage
  
 Run `extract_and_export.py` to isolate a single function:
  
